@@ -1,0 +1,24 @@
+{
+    "name": "gra-api",
+    "version": "1.0.0",
+    "description": "Texo IT - Avaliação Técnica para Desenvolvedor Node.js",
+    "main": "index.js",
+    "scripts": {
+        "watch:ts": "tsc -w",
+        "watch:mnt": "nodemon dist/main.js",
+        "watch": "npm run watch:ts & npm run watch:mnt",
+        "build": "tsc",
+        "serve": "node dist/main.js",
+        "start": "npm run build && npm run serve"
+    },
+    "author": "Jaderson Barreto Sathler <jbsathler@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "restify": "^8.5.1"
+    },
+    "devDependencies": {
+        "@types/restify": "^8.4.2",
+        "nodemon": "^2.0.2",
+        "typescript": "^3.7.5"
+    }
+}
