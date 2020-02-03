@@ -2,8 +2,11 @@
     "name": "gra-api",
     "version": "1.0.0",
     "description": "Texo IT - Avaliação Técnica para Desenvolvedor Node.js",
+    "author": "Jaderson Barreto Sathler <jbsathler@gmail.com>",
+    "license": "MIT",
     "main": "index.js",
     "scripts": {
+        "test": "ts-node jest.startup.ts",
         "watch:ts": "tsc -w",
         "watch:mnt": "nodemon dist/main.js",
         "watch": "npm run watch:ts & npm run watch:mnt",
@@ -11,16 +14,41 @@
         "serve": "node dist/main.js",
         "start": "npm run build && npm run serve"
     },
-    "author": "Jaderson Barreto Sathler <jbsathler@gmail.com>",
-    "license": "MIT",
     "dependencies": {
         "fast-csv": "^4.0.2",
         "nedb": "^1.8.0",
-        "restify": "^8.5.1"
+        "restify": "^8.5.1",
+        "ts-node": "^8.6.2"
     },
     "devDependencies": {
+        "@types/jest": "^25.1.1",
+        "@types/jest-cli": "^24.3.0",
         "@types/restify": "^8.4.2",
+        "@types/supertest": "^2.0.8",
+        "jest": "^25.1.0",
+        "jest-cli": "^25.1.0",
         "nodemon": "^2.0.2",
+        "supertest": "^4.0.2",
+        "ts-jest": "^25.1.0",
         "typescript": "^3.7.5"
+    },
+    "jest": {
+        "verbose": true,
+        "globals": {
+            "address": "http://localhost:3003"
+        },
+        "testEnvironment": "node",
+        "transform": {
+            "^.+\\.tsx?$": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js",
+            "jsx",
+            "json",
+            "node"
+        ]
     }
 }

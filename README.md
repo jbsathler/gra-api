@@ -17,7 +17,7 @@ $ cd /caminho/para/gra-api
 $ npm install
 ```
 
-- Iniciar o gerenciador de processos:
+- Iniciar o servidor:
 
 ```
 $ npm start
@@ -25,10 +25,31 @@ $ npm start
 
 ### Outros scripts pré-configurados:
 
-- Inicia servidor de desenvolvimento (com hot-reload ativado):
+- Iniciar servidor de desenvolvimento (com hot-reload ativado):
 
 ```
 $ npm run watch
+```
+
+- Executar testes de integração (Jest + Supertest):
+
+```
+$ npm test
+```
+
+----
+## Instruções de execução dos testes automatizados
+
+- Iniciar o servidor:
+
+```
+$ npm start
+```
+
+- Com o servidor em execução, executar o script dos testes de integração:
+
+```
+$ npm test
 ```
 
 ----

@@ -4,6 +4,11 @@
         "target": "ES2015",
         "module": "commonjs"
     },
-    "include": ["**/*"],
-    "exclude": ["dist"]
+    "include": [
+        "**/*"
+    ],
+    "exclude": [
+        "dist",
+        "**/*.test.ts"
+    ]
 }
