@@ -29,6 +29,9 @@ class AwardsRouter extends Router {
                     let winners        = multipleAwards.then(docs => this.formatWinnersList(docs));
                     let interval       = winners.then(docs => this.buildMinMaxObject(docs));
 
+                    // pivot.then(docs => {
+                    // multipleAwards.then(docs => {
+                    // winners.then(docs => {
                     interval.then(docs => {
                         resolve(docs);
                     });
@@ -87,8 +90,11 @@ class AwardsRouter extends Router {
                 let winners = [];
 
                 Object.keys(docs).forEach(key => {
-                    this.formatWinnerDoc(docs[key]).then(doc => {
-                        winners.push(doc)
+                    this.formatWinnerDocs(docs[key]).then(docs => {
+                        docs.forEach(doc => {
+                            winners.push(doc)
+                        });
+
                     });
                 });
 
@@ -99,17 +105,26 @@ class AwardsRouter extends Router {
         });
     }
 
-    formatWinnerDoc(doc) : any {
+    formatWinnerDocs(doc) : any {
         return new Promise((resolve, reject) => {
             try {
-                let winner: object = {
-                    'producer'     : doc.producer,
-                    'interval'     : doc.years[1] - doc.years[0],
-                    'previousWin'  : doc.years[0],
-                    'followingWin' : doc.years[1]
-                }
+                let intervals : Array<any> = [];
+                let prevYear  : number     = null;
 
-                resolve(winner);
+                doc.years.forEach(year => {
+                    if (prevYear) {
+                        intervals.push({
+                            'producer'     : doc.producer,
+                            'interval'     : year - prevYear,
+                            'previousWin'  : prevYear,
+                            'followingWin' : year,
+                        });
+                    }
+
+                    prevYear = year;
+                });
+
+                resolve(intervals);
             } catch(error) {
                 reject(error);
             }
@@ -122,8 +137,8 @@ class AwardsRouter extends Router {
                 docs.sort((a, b) => (a.interval > b.interval) ? 1 : -1);
 
                 resolve({
-                    "min" : [ docs[0] ],
-                    "max" : [ docs[docs.length - 1] ]
+                    "min" : docs.filter(doc => doc.interval == docs[0              ].interval),
+                    "max" : docs.filter(doc => doc.interval == docs[docs.length - 1].interval)
                 });
             } catch(error) {
                 reject(error);
